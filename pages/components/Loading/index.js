@@ -1,16 +1,11 @@
-import React from "react";
-import Loader from "react-loader-spinner";
+import { useState, CSSProperties } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
+import styles from "../../../styles/Loading.module.css";
 
 export const Loading = () => {
   return (
-    <div className="loading">
-      <Loader
-        type="TailSpin"
-        color="rgb(0, 153, 255)"
-        height={100}
-        width={100}
-        timeout={3000}
-      />
+    <div className={styles.Loading}>
+      <ClipLoader color="rgb(0, 0, 0)" loading size={150} />
     </div>
   );
 };

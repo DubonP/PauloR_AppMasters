@@ -42,12 +42,31 @@ export default function Home({ status }) {
         .then(setLoading(true))
         .then((res) => res.json())
         .then((data) => {
-          setUserCity(data.localidade);
-          setUserState(data.uf);
-          setUserAddress(data.logradouro);
-          setUserNeighborhood(data.bairro);
-          document.getElementById("number").focus();
+          if (data.erro == "true") {
+            Swal.fire({
+              title: "CEP inválido",
+              text: "Por favor, insira um CEP válido",
+              icon: "error",
+              confirmButtonText: "Ok",
+            });
+            setLoading(false);
+          } else {
+            setUserCity(data.localidade);
+            setUserState(data.uf);
+            setUserAddress(data.logradouro);
+            setUserNeighborhood(data.bairro);
+            document.getElementById("number").focus();
+            setLoading(false);
+          }
         });
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: `CEP inválido`,
+        text: "o cep deve ter 8 digitos.",
+        showConfirmButton: true,
+      });
     }
   };
 
