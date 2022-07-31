@@ -164,7 +164,7 @@ export default function Home({ status }) {
           <h1 className={styles.donation_title}>Dados do Doador</h1>
           <div className={styles.donation_inputs}>
             <div className="">
-              <label aria-required className="" for="name" id="name_label">
+              <label aria-required className="" id="name_label">
                 Nome
               </label>
               <div className="">
@@ -181,7 +181,7 @@ export default function Home({ status }) {
               </div>
             </div>
             <div className="">
-              <label className="" for="email" id="email_label">
+              <label className="" id="email_label">
                 Email
               </label>
               <div className="">
@@ -197,7 +197,7 @@ export default function Home({ status }) {
               </div>
             </div>
             <div className="">
-              <label className="" for="phone" id="phone_label">
+              <label className="" id="phone_label">
                 Telefone
               </label>
               <div className="">
@@ -218,7 +218,7 @@ export default function Home({ status }) {
           <h1 className={styles.donation_title}>Endereco</h1>
           <div className={styles.donation_inputs}>
             <div className="">
-              <label aria-required className="" for="cep" id="cep_label">
+              <label aria-required className="" id="cep_label">
                 Cep
               </label>
               <div className="">
@@ -236,7 +236,7 @@ export default function Home({ status }) {
               </div>
             </div>
             <div className="">
-              <label aria-required className="" for="city" id="city_label">
+              <label aria-required className="" id="city_label">
                 Cidade
               </label>
               <div className="">
@@ -253,7 +253,7 @@ export default function Home({ status }) {
               </div>
             </div>
             <div className="">
-              <label aria-required className="" for="state" id="state_label">
+              <label aria-required className="" id="state_label">
                 Estado
               </label>
               <div className="">
@@ -270,12 +270,7 @@ export default function Home({ status }) {
               </div>
             </div>
             <div className="">
-              <label
-                aria-required
-                className=""
-                for="streetAddress"
-                id="streetAddress_label"
-              >
+              <label aria-required className="" id="streetAddress_label">
                 Logradouro
               </label>
               <div className="">
@@ -292,7 +287,7 @@ export default function Home({ status }) {
               </div>
             </div>
             <div className="">
-              <label aria-required className="" for="number" id="number_label">
+              <label aria-required className="" id="number_label">
                 numero
               </label>
               <div className="">
@@ -310,12 +305,7 @@ export default function Home({ status }) {
               </div>
             </div>
             <div className="">
-              <label
-                aria-required
-                className=""
-                for="complement"
-                id="complement_label"
-              >
+              <label aria-required className="" id="complement_label">
                 Complemento
               </label>
               <div className="">
@@ -331,12 +321,7 @@ export default function Home({ status }) {
               </div>
             </div>
             <div className="">
-              <label
-                aria-required
-                className=""
-                for="neighborhood"
-                id="neighborhood_label"
-              >
+              <label aria-required className="" id="neighborhood_label">
                 Bairro
               </label>
               <div className="">
@@ -355,7 +340,7 @@ export default function Home({ status }) {
           </div>
           <h1 className={styles.donation_title}>Equipamentos</h1>
           <div className={styles.donation_inputs}>
-            <label className="" for="eqNumber" id="eqNumber_label">
+            <label className="" id="eqNumber_label">
               Numero de equipamentos
             </label>
             <div className="">
