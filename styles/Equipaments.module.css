@@ -1,0 +1,24 @@
+.equipament_all_h1 {
+  margin-top: 3%;
+}
+
+.equipament_all {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  margin: 1rem;
+  padding: 1rem;
+  font-size: clamp(0.7rem, 4vw, 1.1rem);
+  border: solid 1px rgb(9, 145, 204);
+  background: rgb(10, 181, 255);
+  border-radius: 5px;
+  box-shadow: -5px 5px 0px rgb(10, 127, 177);
+}
+
+.equipament_type {
+  color: black;
+  font-weight: bold;
+  border: solid 1px rgb(10, 181, 255);
+  border-radius: 5px;
+  font-size: clamp(0.7rem, 4vw, 0.8rem);
+}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "../../../styles/Equipaments.module.css";
 
 export function Equipaments({ index, handleDevice }) {
   const [userEquipamentType, setUserEquipamentType] = useState("");
@@ -15,12 +16,14 @@ export function Equipaments({ index, handleDevice }) {
   }
 
   return (
-    <div>
+    <div className={styles.equipament_all_h1}>
       <h2>Sobre o equipamento -{index + 1}</h2>
-      <div>
+      <div className={styles.equipament_all}>
         <select
+          className={styles.equipament_type}
           onBlur={handleChange}
           onChange={(e) => setUserEquipamentType(e.target.value)}
+          required
         >
           <option disabled selected>
             Equipamento
@@ -33,8 +36,10 @@ export function Equipaments({ index, handleDevice }) {
           <option value="scanner">Scanner</option>
         </select>
         <select
+          className={styles.equipament_type}
           onBlur={handleChange}
           onChange={(e) => setUserEquipamentDescription(e.target.value)}
+          required
         >
           <option disabled selected>
             Selecione o estado do equipamento

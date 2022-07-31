@@ -2,8 +2,9 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { api } from "./api/API";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Equipaments } from "./components/Equipaments";
+import { Loading } from "./components/Loading";
 
 export async function getStaticProps() {
   const data = await fetch(`https://doar-computador-api.herokuapp.com/`);
@@ -26,6 +27,7 @@ export default function Home({ status }) {
   const [userNeighborhood, setUserNeighborhood] = useState("");
   const [userEquipament, setUserEquipament] = useState(0);
   const [devices, setDevices] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   function handleDevice(device, index) {
     const newDevices = [...devices];
@@ -37,6 +39,7 @@ export default function Home({ status }) {
     const cep = e.target.value.replace(/[^0-9]/g, "");
     if (cep.length === 8) {
       fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(setLoading(true))
         .then((res) => res.json())
         .then((data) => {
           setUserCity(data.localidade);
@@ -59,9 +62,9 @@ export default function Home({ status }) {
         city: userCity,
         state: userState,
         streetAddress: userAddress,
-        number: "123",
-        complement: "cdgfg",
-        neighborhood: "fdsfsdf",
+        number: userHouseNumber,
+        complement: userComplement,
+        neighborhood: userNeighborhood,
         deviceCount: Number(userEquipament),
         devices,
       })
@@ -73,14 +76,47 @@ export default function Home({ status }) {
           showConfirmButton: false,
           timer: 3000,
         });
+        console.log(response.config.data);
       })
       .catch(function (error) {
-        if (error.response) {
+        if (error.response.status == 400) {
           Swal.fire({
             position: "center",
             icon: "error",
-            title: `Erro: ${error.response.status}`,
-            text: error.response.statusText,
+            title: `Erro: ${error.response.status} - ${error.response.statusText}`,
+            text: "Preencha corretamente todos os campos",
+            showConfirmButton: true,
+          });
+        } else if (error.response.status == 500) {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: `Erro: ${error.response.status} - ${error.response.statusText}`,
+            text: "Erro no servidor, tente novamente mais tarde",
+            showConfirmButton: true,
+          });
+        } else if (error.response.status == 501) {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: `Erro: ${error.response.status} - ${error.response.statusText}`,
+            text: "O metodo usado para fazer a requisicao nao funcionou ou nao encontrou o server. Por favor tente novamente mais tarde",
+            showConfirmButton: true,
+          });
+        } else if (error.response.status == 503) {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: `Erro: ${error.response.status} - ${error.response.statusText}`,
+            text: "Servidor indisponivel, tente novamente mais tarde",
+            showConfirmButton: true,
+          });
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: `Erro: ${error.response.status} - ${error.response.statusText}`,
+            text: "Erro desconhecido, tente novamente mais tarde",
             showConfirmButton: true,
           });
         }
@@ -101,6 +137,7 @@ export default function Home({ status }) {
         )}
       </header>
       <main className={styles.main}>
+        <div>{loading == true && <Loading />}</div>
         <form
           onSubmit={(e) => postDonation(e)}
           className={styles.donation_form}
@@ -245,8 +282,10 @@ export default function Home({ status }) {
                   name="number"
                   type="number"
                   placeholder="ex:999"
+                  value={userHouseNumber}
                   required
                   pattern="[0-9]{11}"
+                  onChange={(e) => setUserHouseNumber(e.target.value)}
                   className=""
                 ></input>
               </div>
@@ -264,8 +303,10 @@ export default function Home({ status }) {
                 <input
                   id="complement"
                   name="complement"
+                  value={userComplement}
                   type="text"
                   placeholder="ex: Proximo ao mercado"
+                  onChange={(e) => setUserComplement(e.target.value)}
                   className=""
                 ></input>
               </div>
@@ -283,9 +324,11 @@ export default function Home({ status }) {
                 <input
                   id="neighborhood"
                   name="neighborhood"
+                  value={userNeighborhood}
                   type="text"
                   placeholder="ex:Centro"
                   required
+                  onChange={(e) => setUserNeighborhood(e.target.value)}
                   className=""
                 ></input>
               </div>
