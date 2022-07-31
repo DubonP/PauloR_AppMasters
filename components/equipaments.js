@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "../../../styles/Equipaments.module.css";
+import styles from "../styles/Equipaments.module.css";
 
 export function Equipaments({ index, handleDevice }) {
   const [userEquipamentType, setUserEquipamentType] = useState("");

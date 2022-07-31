@@ -3,8 +3,8 @@ import styles from "../styles/Home.module.css";
 import { api } from "./api/API";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
-import { Equipaments } from "./components/Equipaments";
-import { Loading } from "./components/Loading";
+import { Equipaments } from "../components/Equipaments";
+import { Loading } from "../components/Loading";
 
 export async function getStaticProps() {
   const data = await fetch(`https://doar-computador-api.herokuapp.com/`);
@@ -95,7 +95,6 @@ export default function Home({ status }) {
           showConfirmButton: false,
           timer: 3000,
         });
-        console.log(response.config.data);
       })
       .catch(function (error) {
         if (error.response.status == 400) {
