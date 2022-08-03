@@ -42,7 +42,7 @@ export function Equipaments({ index, handleDevice }) {
           required
         >
           <option disabled selected>
-            Selecione o estado do equipamento
+            Selecione o estado do equipamento:
           </option>
           <option value="working">
             Tem todas as partes, liga e funciona normalmente
