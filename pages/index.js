@@ -2,17 +2,10 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { api } from "./api/API";
 import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Equipaments } from "../components/Equipaments";
 import { Loading } from "../components/Loading";
-
-export async function getStaticProps() {
-  const data = await fetch(`https://doar-computador-api.herokuapp.com/`);
-  const status = await data.json();
-  return {
-    props: { status },
-  };
-}
+import { Header } from "../components/Header";
 
 export default function Home({ status }) {
   const [userEmail, setUserEmail] = useState("");
@@ -144,17 +137,16 @@ export default function Home({ status }) {
   return (
     <div>
       <Head>
-        <title>Paulo Rossi App Masters</title>
+        <title>Doação de computadores</title>
       </Head>
-      <header className={styles.All_header}>
-        <h1>Doação de computadores usados:</h1>
-        {status.alive ? (
-          <p className={styles.API_online}>API Online</p>
-        ) : (
-          <p className={styles.API_offline}>API Offline</p>
-        )}
-      </header>
+      <Header />
       <main className={styles.main}>
+        {/* <Image
+          src="/images/Computadores.jpg"
+          layout="fill"
+          alt="Background"
+          className={styles.background}
+        /> */}
         <div>{loading == true && <Loading />}</div>
         <form
           onSubmit={(e) => postDonation(e)}
@@ -164,7 +156,7 @@ export default function Home({ status }) {
           <div className={styles.donation_inputs}>
             <div className="">
               <label aria-required className="" id="name_label">
-                Nome
+                Nome:
               </label>
               <div className="">
                 <input
@@ -174,14 +166,14 @@ export default function Home({ status }) {
                   placeholder="Nome"
                   value={userName}
                   required
-                  className=""
+                  className={styles.donation_input}
                   onChange={(e) => setUserName(e.target.value)}
                 ></input>
               </div>
             </div>
             <div className="">
               <label className="" id="email_label">
-                Email
+                Email:
               </label>
               <div className="">
                 <input
@@ -190,21 +182,21 @@ export default function Home({ status }) {
                   value={userEmail}
                   name="email"
                   placeholder="exemplo@exemp.com.br"
-                  className=""
+                  className={styles.donation_input}
                   onChange={(e) => setUserEmail(e.target.value)}
                 ></input>
               </div>
             </div>
             <div className="">
               <label className="" id="phone_label">
-                Telefone
+                Telefone:
               </label>
               <div className="">
                 <input
                   id="phone"
                   name="phone"
                   type="text"
-                  className=""
+                  className={styles.donation_input}
                   required
                   value={userPhone}
                   placeholder="ex:17999998888"
@@ -218,7 +210,7 @@ export default function Home({ status }) {
           <div className={styles.donation_inputs}>
             <div className="">
               <label aria-required className="" id="cep_label">
-                Cep
+                Cep:
               </label>
               <div className="">
                 <input
@@ -228,7 +220,7 @@ export default function Home({ status }) {
                   value={userZipCode}
                   placeholder="ex: 11777000"
                   required
-                  className=""
+                  className={styles.donation_input}
                   onBlur={checkCEP}
                   onChange={(e) => setUserZipCode(e.target.value)}
                 ></input>
@@ -236,7 +228,7 @@ export default function Home({ status }) {
             </div>
             <div className="">
               <label aria-required className="" id="city_label">
-                Cidade
+                Cidade:
               </label>
               <div className="">
                 <input
@@ -246,14 +238,14 @@ export default function Home({ status }) {
                   type="text"
                   placeholder="Cidade"
                   required
-                  className=""
+                  className={styles.donation_input}
                   onChange={(e) => setUserCity(e.target.value)}
                 ></input>
               </div>
             </div>
             <div className="">
               <label aria-required className="" id="state_label">
-                Estado
+                Estado:
               </label>
               <div className="">
                 <input
@@ -263,14 +255,14 @@ export default function Home({ status }) {
                   type="text"
                   placeholder="Estado"
                   required
-                  className=""
+                  className={styles.donation_input}
                   onChange={(e) => setUserState(e.target.value)}
                 ></input>
               </div>
             </div>
             <div className="">
               <label aria-required className="" id="streetAddress_label">
-                Logradouro
+                Logradouro:
               </label>
               <div className="">
                 <input
@@ -280,14 +272,14 @@ export default function Home({ status }) {
                   type="text"
                   placeholder="Rua, avenida, travessa"
                   required
-                  className=""
+                  className={styles.donation_input}
                   onChange={(e) => setUserAddress(e.target.value)}
                 ></input>
               </div>
             </div>
             <div className="">
               <label aria-required className="" id="number_label">
-                numero
+                Numero:
               </label>
               <div className="">
                 <input
@@ -299,13 +291,13 @@ export default function Home({ status }) {
                   required
                   pattern="[0-9]{11}"
                   onChange={(e) => setUserHouseNumber(e.target.value)}
-                  className=""
+                  className={styles.donation_input}
                 ></input>
               </div>
             </div>
             <div className="">
               <label aria-required className="" id="complement_label">
-                Complemento
+                Complemento:
               </label>
               <div className="">
                 <input
@@ -315,13 +307,13 @@ export default function Home({ status }) {
                   type="text"
                   placeholder="ex: Proximo ao mercado"
                   onChange={(e) => setUserComplement(e.target.value)}
-                  className=""
+                  className={styles.donation_input}
                 ></input>
               </div>
             </div>
             <div className="">
               <label aria-required className="" id="neighborhood_label">
-                Bairro
+                Bairro:
               </label>
               <div className="">
                 <input
@@ -332,7 +324,7 @@ export default function Home({ status }) {
                   placeholder="ex:Centro"
                   required
                   onChange={(e) => setUserNeighborhood(e.target.value)}
-                  className=""
+                  className={styles.donation_input}
                 ></input>
               </div>
             </div>
@@ -340,16 +332,16 @@ export default function Home({ status }) {
           <h1 className={styles.donation_title}>Equipamentos</h1>
           <div className={styles.donation_inputs}>
             <label className="" id="eqNumber_label">
-              Numero de equipamentos
+              Numero de equipamentos:
             </label>
-            <div className="">
+            <div className={styles.donation_eq_number}>
               <input
                 id="eqNumber"
                 name="eqNumber"
                 type="number"
                 placeholder="1 - 1000"
                 required
-                className=""
+                className={styles.donation_input_eq}
                 onChange={(e) => setUserEquipament(e.target.value)}
               ></input>
             </div>

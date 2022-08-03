@@ -8,7 +8,7 @@
   grid-gap: 1rem;
   margin: 1rem;
   padding: 1rem;
-  font-size: clamp(0.7rem, 4vw, 1.1rem);
+  font-size: clamp(1rem, 4vw, 1.2rem);
   border: solid 1px rgb(9, 145, 204);
   background: rgb(10, 181, 255);
   border-radius: 5px;
@@ -21,4 +21,22 @@
   border: solid 1px rgb(10, 181, 255);
   border-radius: 5px;
   font-size: clamp(0.7rem, 4vw, 0.8rem);
+}
+
+@media screen and (max-width: 540px) {
+  .equipament_all {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .equipament_all {
+    grid-gap: 1rem;
+    margin: 1rem;
+    padding: 1rem;
+    font-size: clamp(0.7rem, 4vw, 1.1rem);
+  }
+  .equipament_type {
+    width: 100%;
+  }
 }
