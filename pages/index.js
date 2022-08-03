@@ -3,7 +3,7 @@ import styles from "../styles/Home.module.css";
 import { api } from "./api/API";
 import Swal from "sweetalert2";
 import { useState } from "react";
-import { Equipaments } from "../components/Equipaments";
+import { Equipament } from "../components/Equipament";
 import { Loading } from "../components/Loading";
 import { Header } from "../components/Header";
 
@@ -349,7 +349,7 @@ export default function Home({ status }) {
           <div id="new_equipaments">
             {userEquipament > 0 &&
               [...Array(Number(userEquipament))].map((_, index) => (
-                <Equipaments
+                <Equipament
                   key={index}
                   index={index}
                   handleDevice={handleDevice}
