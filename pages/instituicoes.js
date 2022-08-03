@@ -8,7 +8,7 @@ export default function instituicoes() {
       <h1>Instituições</h1>
       <p>
         Aqui você pode encontrar todas as instituições que estão cadastradas no
-        sistema.
+        sistemaaa.
       </p>
     </div>
   );
