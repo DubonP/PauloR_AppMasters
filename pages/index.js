@@ -154,12 +154,6 @@ export default function Home({ status }) {
       </Head>
       <Header />
       <main className={styles.main}>
-        {/* <Image
-          src="/images/Computadores.jpg"
-          layout="fill"
-          alt="Background"
-          className={styles.background}
-        /> */}
         <div>{loading == true && <Loading />}</div>
         <form
           onSubmit={(e) => postDonation(e)}
@@ -170,55 +164,40 @@ export default function Home({ status }) {
           </div>
           <div className={styles.donation_inputs}>
             <div className="">
-              <label aria-required className="" id="name_label">
-                Nome:
-              </label>
-              <div className="">
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Nome"
-                  value={userName}
-                  required
-                  className={styles.donation_input}
-                  onChange={(e) => setUserName(e.target.value)}
-                ></input>
-              </div>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Nome"
+                value={userName}
+                required
+                className={styles.donation_input}
+                onChange={(e) => setUserName(e.target.value)}
+              ></input>
             </div>
             <div className="">
-              <label className="" id="email_label">
-                Email:
-              </label>
-              <div className="">
-                <input
-                  type="email"
-                  id="email"
-                  value={userEmail}
-                  name="email"
-                  placeholder="exemplo@exemp.com.br"
-                  className={styles.donation_input}
-                  onChange={(e) => setUserEmail(e.target.value)}
-                ></input>
-              </div>
+              <input
+                type="email"
+                id="email"
+                value={userEmail}
+                name="email"
+                placeholder="Email"
+                className={styles.donation_input}
+                onChange={(e) => setUserEmail(e.target.value)}
+              ></input>
             </div>
             <div className="">
-              <label className="" id="phone_label">
-                Telefone:
-              </label>
-              <div className="">
-                <input
-                  id="phone"
-                  name="phone"
-                  type="text"
-                  className={styles.donation_input}
-                  required
-                  value={userPhone}
-                  placeholder="ex:17999998888"
-                  pattern="[0-9]{11}"
-                  onChange={(e) => setUserPhone(e.target.value)}
-                ></input>
-              </div>
+              <input
+                id="phone"
+                name="phone"
+                type="text"
+                className={styles.donation_input}
+                required
+                value={userPhone}
+                placeholder="Celular"
+                pattern="[0-9]{11}"
+                onChange={(e) => setUserPhone(e.target.value)}
+              ></input>
             </div>
           </div>
           <div className={styles.donation_title_position}>
@@ -226,124 +205,89 @@ export default function Home({ status }) {
           </div>
           <div className={styles.donation_inputs}>
             <div className="">
-              <label aria-required className="" id="cep_label">
-                Cep:
-              </label>
-              <div className="">
-                <input
-                  id="textCEP"
-                  name="cep"
-                  type="text"
-                  value={userZipCode}
-                  placeholder="ex: 11777000"
-                  required
-                  className={styles.donation_input}
-                  onBlur={checkCEP}
-                  onChange={(e) => setUserZipCode(e.target.value)}
-                ></input>
-              </div>
+              <input
+                id="textCEP"
+                name="cep"
+                type="text"
+                value={userZipCode}
+                placeholder="CEP"
+                required
+                className={styles.donation_input}
+                onBlur={checkCEP}
+                onChange={(e) => setUserZipCode(e.target.value)}
+              ></input>
             </div>
             <div className="">
-              <label aria-required className="" id="city_label">
-                Cidade:
-              </label>
-              <div className="">
-                <input
-                  id="city"
-                  value={userCity}
-                  name="city"
-                  type="text"
-                  placeholder="Cidade"
-                  required
-                  className={styles.donation_input}
-                  onChange={(e) => setUserCity(e.target.value)}
-                ></input>
-              </div>
+              <input
+                id="city"
+                value={userCity}
+                name="city"
+                type="text"
+                placeholder="Cidade"
+                required
+                className={styles.donation_input}
+                onChange={(e) => setUserCity(e.target.value)}
+              ></input>
             </div>
             <div className="">
-              <label aria-required className="" id="state_label">
-                Estado:
-              </label>
-              <div className="">
-                <input
-                  id="state"
-                  value={userState}
-                  name="state"
-                  type="text"
-                  placeholder="Estado"
-                  required
-                  className={styles.donation_input}
-                  onChange={(e) => setUserState(e.target.value)}
-                ></input>
-              </div>
+              <input
+                id="state"
+                value={userState}
+                name="state"
+                type="text"
+                placeholder="Estado"
+                required
+                className={styles.donation_input}
+                onChange={(e) => setUserState(e.target.value)}
+              ></input>
             </div>
             <div className="">
-              <label aria-required className="" id="streetAddress_label">
-                Logradouro:
-              </label>
-              <div className="">
-                <input
-                  id="streetAddress"
-                  value={userAddress}
-                  name="streetAddress"
-                  type="text"
-                  placeholder="Rua, avenida, travessa"
-                  required
-                  className={styles.donation_input}
-                  onChange={(e) => setUserAddress(e.target.value)}
-                ></input>
-              </div>
+              <input
+                id="streetAddress"
+                value={userAddress}
+                name="streetAddress"
+                type="text"
+                placeholder="Logradouro (Rua, avenida, etc)"
+                required
+                className={styles.donation_input}
+                onChange={(e) => setUserAddress(e.target.value)}
+              ></input>
             </div>
             <div className="">
-              <label aria-required className="" id="number_label">
-                Numero:
-              </label>
-              <div className="">
-                <input
-                  id="number"
-                  name="number"
-                  type="number"
-                  placeholder="ex:999"
-                  value={userHouseNumber}
-                  required
-                  pattern="[0-9]{11}"
-                  onChange={(e) => setUserHouseNumber(e.target.value)}
-                  className={styles.donation_input}
-                ></input>
-              </div>
+              <input
+                id="number"
+                name="number"
+                type="number"
+                placeholder="Numero"
+                value={userHouseNumber}
+                required
+                pattern="[0-9]{11}"
+                onChange={(e) => setUserHouseNumber(e.target.value)}
+                className={styles.donation_input}
+              ></input>
             </div>
             <div className="">
-              <label aria-required className="" id="complement_label">
-                Complemento:
-              </label>
-              <div className="">
-                <input
-                  id="complement"
-                  name="complement"
-                  value={userComplement}
-                  type="text"
-                  placeholder="ex: Proximo ao mercado"
-                  onChange={(e) => setUserComplement(e.target.value)}
-                  className={styles.donation_input}
-                ></input>
-              </div>
+              <input
+                id="complement"
+                name="complement"
+                value={userComplement}
+                type="text"
+                placeholder="Complemento"
+                onChange={(e) => setUserComplement(e.target.value)}
+                className={styles.donation_input}
+              ></input>
             </div>
             <div className="">
-              <label aria-required className="" id="neighborhood_label">
-                Bairro:
-              </label>
-              <div className="">
-                <input
-                  id="neighborhood"
-                  name="neighborhood"
-                  value={userNeighborhood}
-                  type="text"
-                  placeholder="ex:Centro"
-                  required
-                  onChange={(e) => setUserNeighborhood(e.target.value)}
-                  className={styles.donation_input}
-                ></input>
-              </div>
+              <input
+                id="neighborhood"
+                name="neighborhood"
+                value={userNeighborhood}
+                type="text"
+                placeholder="Bairro"
+                required
+                onChange={(e) => setUserNeighborhood(e.target.value)}
+                className={styles.donation_input}
+              ></input>
             </div>
           </div>
           <div className={styles.donation_title_position}>
@@ -360,7 +304,7 @@ export default function Home({ status }) {
                 type="number"
                 placeholder="1 - 1000"
                 required
-                className={styles.donation_input_eq}
+                className={styles.donation_input}
                 onChange={(e) => setUserEquipament(e.target.value)}
               ></input>
             </div>
