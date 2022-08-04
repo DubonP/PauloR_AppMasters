@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: space-around;
   text-align: center;
-  height: 5rem;
+  height: 6.5rem;
   background: rgb(210, 241, 255);
   border-bottom: solid 5px rgb(92, 92, 92);
   padding: 10px;
@@ -15,6 +15,7 @@
   font-weight: bold;
   color: rgb(19, 19, 62);
   text-decoration: underline rgb(10, 181, 255);
+  cursor: pointer;
 }
 
 .All_header h1::first-letter {
@@ -28,7 +29,20 @@
   border-radius: 50%;
 }
 
+.header_logo_img {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+}
+
+.header_logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .Buttons {
+  padding-left: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -37,43 +51,18 @@
 }
 
 .Button {
-  font-size: 14px;
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
   font-weight: bold;
-  width: 7rem;
-  height: 2.2rem;
-  border: solid 1px rgb(0, 0, 0);
-  border-radius: 10px;
-  background: rgb(255, 255, 255);
-  box-shadow: -5px 5px 0px rgb(10, 127, 177);
+  cursor: pointer;
 }
 
-.Button:active {
-  box-shadow: inset -4px 4px 0px rgb(10, 127, 177);
+.Button:hover {
+  text-decoration: underline rgb(10, 181, 255);
 }
 
-@media screen and (max-width: 670px) {
-  .Button {
-    width: 6rem;
-  }
-}
-
-@media screen and (max-width: 570px) {
-  .Button {
-    width: 5rem;
-    box-shadow: -3px 3px 0px rgb(10, 127, 177);
-  }
-  .Button:active {
-    box-shadow: inset -3px 3px 0px rgb(10, 127, 177);
-  }
-}
-
-@media screen and (max-width: 410px) {
-  .Button {
-    width: 4.6rem;
-    height: 2rem;
-    font-size: 11.5px;
-  }
-  .Buttons {
-    width: 15rem;
+@media screen and (max-width: 650px) {
+  .header_logo_img {
+    width: 0;
+    height: 0;
   }
 }
