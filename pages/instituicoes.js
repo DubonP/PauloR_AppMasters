@@ -1,15 +1,18 @@
 import React from "react";
 import { Header } from "../components/Header";
+import { instituicoesData } from "../data/instituicoesdata";
+import { CardInstituicoes } from "../components/CardInstituicoes/CardInstituicoes";
 
 export default function instituicoes() {
   return (
     <div>
       <Header />
       <h1>Instituições</h1>
-      <p>
-        Aqui você pode encontrar todas as instituições que estão cadastradas no
-        sistemaaa.
-      </p>
+      <div>
+        {instituicoesData.map((item) => (
+          <CardInstituicoes key={item.id} inst={item} />
+        ))}
+      </div>
     </div>
   );
 }

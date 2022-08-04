@@ -88,21 +88,34 @@ export default function Home({ status }) {
           showConfirmButton: false,
           timer: 3000,
         });
+        {
+          setUserName(""),
+            setUserEmail(""),
+            setUserPhone(""),
+            setUserZipCode(""),
+            setUserCity(""),
+            setUserState(""),
+            setUserAddress(""),
+            setUserHouseNumber(""),
+            setUserComplement(""),
+            setUserNeighborhood("");
+        }
       })
       .catch(function (error) {
         if (error.response.status == 400) {
           Swal.fire({
             position: "center",
             icon: "error",
-            title: `Erro: ${error.response.status} - ${error.response.statusText}`,
-            text: "Preencha corretamente todos os campos",
+            title: `Erro: ${error.response.status} - ${error.response.data.errorMessage}`,
+            text: "Preencha corretamente o campo para continuar",
             showConfirmButton: true,
           });
+          console.log(error.response.data.errorMessage);
         } else if (error.response.status == 500) {
           Swal.fire({
             position: "center",
             icon: "error",
-            title: `Erro: ${error.response.status} - ${error.response.statusText}`,
+            title: `Erro: ${error.response.status} - ${error.response.data.errorMessage}`,
             text: "Erro no servidor, tente novamente mais tarde",
             showConfirmButton: true,
           });
@@ -110,7 +123,7 @@ export default function Home({ status }) {
           Swal.fire({
             position: "center",
             icon: "error",
-            title: `Erro: ${error.response.status} - ${error.response.statusText}`,
+            title: `Erro: ${error.response.status} - ${error.response.data.errorMessage}`,
             text: "O metodo usado para fazer a requisicao nao funcionou ou nao encontrou o server. Por favor tente novamente mais tarde",
             showConfirmButton: true,
           });
@@ -118,7 +131,7 @@ export default function Home({ status }) {
           Swal.fire({
             position: "center",
             icon: "error",
-            title: `Erro: ${error.response.status} - ${error.response.statusText}`,
+            title: `Erro: ${error.response.status} - ${error.response.data.errorMessage}`,
             text: "Servidor indisponivel, tente novamente mais tarde",
             showConfirmButton: true,
           });
@@ -126,7 +139,7 @@ export default function Home({ status }) {
           Swal.fire({
             position: "center",
             icon: "error",
-            title: `Erro: ${error.response.status} - ${error.response.statusText}`,
+            title: `Erro: ${error.response.status} - ${error.response.data.errorMessage}`,
             text: "Erro desconhecido, tente novamente mais tarde",
             showConfirmButton: true,
           });
