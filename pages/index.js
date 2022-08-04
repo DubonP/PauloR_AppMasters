@@ -165,7 +165,9 @@ export default function Home({ status }) {
           onSubmit={(e) => postDonation(e)}
           className={styles.donation_form}
         >
-          <h1 className={styles.donation_title}>Dados do Doador</h1>
+          <div className={styles.donation_title_position}>
+            <h1 className={styles.donation_title}>Dados do Doador</h1>
+          </div>
           <div className={styles.donation_inputs}>
             <div className="">
               <label aria-required className="" id="name_label">
@@ -219,7 +221,9 @@ export default function Home({ status }) {
               </div>
             </div>
           </div>
-          <h1 className={styles.donation_title}>Endereco</h1>
+          <div className={styles.donation_title_position}>
+            <h1 className={styles.donation_title}>Endereco</h1>
+          </div>
           <div className={styles.donation_inputs}>
             <div className="">
               <label aria-required className="" id="cep_label">
@@ -342,7 +346,9 @@ export default function Home({ status }) {
               </div>
             </div>
           </div>
-          <h1 className={styles.donation_title}>Equipamentos</h1>
+          <div className={styles.donation_title_position}>
+            <h1 className={styles.donation_title}>Equipamentos</h1>
+          </div>
           <div className={styles.donation_inputs}>
             <label className="" id="eqNumber_label">
               Numero de equipamentos:

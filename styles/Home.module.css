@@ -32,9 +32,10 @@
 
 .donation_inputs {
   display: grid;
+  width: 100%;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
-  margin: 1rem;
+  margin-bottom: 1.2rem;
   padding: 1rem;
   font-size: clamp(1rem, 4vw, 1.2rem);
   border: solid 1px rgb(9, 145, 204);
@@ -45,8 +46,8 @@
 
 .donation_input {
   height: 25px;
-  width: 11rem;
-  padding-left: 10px;
+  width: 100%;
+  padding-left: 1rem;
   border-radius: 5px;
 }
 
@@ -64,14 +65,24 @@
   border-radius: 5px;
 }
 
+.donation_title_position {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
 .donation_title {
-  font-size: clamp(1.5rem, 6vw, 2rem);
+  font-size: clamp(1.3rem, 6vw, 1.5rem);
   font-weight: bold;
+  color: rgb(88, 88, 88);
+  text-decoration-line: underline;
 }
 
 .button_form {
   margin-top: 30px;
-  width: 25%;
+  font-weight: bold;
+  width: 35%;
   height: 3rem;
   border: solid 1px rgb(0, 0, 0);
   border-radius: 10px;
@@ -96,7 +107,6 @@
   }
   .donation_inputs {
     grid-gap: 0.8rem;
-    margin: 0.8rem;
     padding: 0.8rem;
   }
 }
@@ -112,7 +122,6 @@
     grid-template-columns: 1fr;
     width: 100%;
     grid-gap: 1rem;
-    margin: 1rem;
     padding: 1rem;
   }
   .donation_form {

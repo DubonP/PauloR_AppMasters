@@ -1,18 +1,76 @@
 .CardInstituicoes_all {
+  width: 320px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  width: 100%;
+  text-align: center;
   height: 100%;
-  background-color: #fff;
-  border-bottom: solid 2px rgb(0, 0, 0);
+  background-color: rgb(228, 252, 255);
+  border-radius: 12px;
   margin-bottom: 20px;
 }
 
+.CardInstituicoes_card {
+  margin: 10px 20px 10px 20px;
+}
+
+.CardInstituicoes_apresentacao {
+  text-align: initial;
+}
+
 .CardInstituicoes_img {
-  width: 200px;
-  height: 200px;
+  position: relative;
+  width: 100%;
+  height: 280px;
+  background-size: cover;
   align-items: center;
   background-repeat: no-repeat;
   background-position: center;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.CardInstituicoes_title {
+  margin-bottom: 15px;
+}
+
+.CardInstituicoes_endereco {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: initial;
+}
+
+.CardInstituicoes_links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.CardInstituicoes_link_border {
+  text-align: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  box-shadow: 0 0 2px 1px rgb(216, 216, 216);
+  display: inline-block;
+}
+
+.CardInstituicoes_link_border:hover {
+  box-shadow: 0 0 0px 1px rgb(216, 216, 216);
+}
+.CardInstituicoes_link:hover {
+  zoom: 1.04;
+}
+
+.CardInstituicoes_link {
+  width: 1.5rem;
+  height: 100%;
+  cursor: pointer;
+  color: rgb(10, 181, 255);
 }

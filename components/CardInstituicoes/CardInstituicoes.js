@@ -2,35 +2,48 @@ import React from "react";
 import Link from "next/link";
 import styles from "../../styles/CardInstituicoes.module.css";
 import Image from "next/image";
+import { BsInstagram, BsFacebook, BsWhatsapp } from "react-icons/bs";
 
 export function CardInstituicoes(props) {
   return (
     <div className={styles.CardInstituicoes_all}>
       <div className={styles.CardInstituicoes_img}>
         <Image
-          src="/images/Computadores.jpg"
-          width={200}
-          height={200}
+          src={props.inst.image}
+          layout="fill"
           alt="Background"
           className={styles.background}
         />
       </div>
       <div className={styles.CardInstituicoes_card}>
-        <div>
+        <div className={styles.CardInstituicoes_title}>
           <h2>{props.inst.nome}</h2>
         </div>
-        <div>
-          <span>{props.inst.cidade}</span>
-          <span>{props.inst.bairro}</span>
+        <div className={styles.CardInstituicoes_endereco}>
+          <span>Cidade:{props.inst.cidade}</span>
+          <span>Bairro:{props.inst.bairro}</span>
         </div>
-        <div>
+        <div className={styles.CardInstituicoes_apresentacao}>
           <span>{props.inst.apresentacao}</span>
         </div>
-        <div>
+        <div className={styles.CardInstituicoes_links}>
+          Links:
           <Link href={props.inst.links.site}>Site</Link>
-          <Link href={props.inst.links.instagram}>Instagram</Link>
-          <Link href={props.inst.links.facebook}>Facebook</Link>
-          <Link href={props.inst.links.whatsapp}>Whatsapp</Link>
+          <div className={styles.CardInstituicoes_link_border}>
+            <Link href={props.inst.links.instagram}>
+              <BsInstagram className={styles.CardInstituicoes_link} />
+            </Link>
+          </div>
+          <div className={styles.CardInstituicoes_link_border}>
+            <Link href={props.inst.links.facebook}>
+              <BsFacebook className={styles.CardInstituicoes_link} />
+            </Link>
+          </div>
+          <div className={styles.CardInstituicoes_link_border}>
+            <Link href={props.inst.links.whatsapp}>
+              <BsWhatsapp className={styles.CardInstituicoes_link} />
+            </Link>
+          </div>
         </div>
       </div>
     </div>
