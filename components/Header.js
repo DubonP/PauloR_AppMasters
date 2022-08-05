@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styles from "../styles/Header.module.css";
-import instituicoes from "../pages/instituicoes.js";
 import Image from "next/image";
 
 export const Header = () => {

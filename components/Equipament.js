@@ -6,6 +6,7 @@ export function Equipament({ index, handleDevice }) {
   const [userEquipamentDescription, setUserEquipamentDescription] =
     useState("");
   function handleChange() {
+    /* se o "userEquipamentType" e "userEquipamentDescription" retornarem true (forem selecionados), eles serao salvos em "device" */
     if (userEquipamentType && userEquipamentDescription) {
       const device = {
         type: userEquipamentType,
@@ -17,6 +18,7 @@ export function Equipament({ index, handleDevice }) {
 
   return (
     <div className={styles.equipament_all_h1}>
+      {/* index + 1 pois o index inicia em 0, assim apareci "1" no primeiro equipamento */}
       <h2>Sobre o equipamento -{index + 1}</h2>
       <div className={styles.equipament_all}>
         <select
@@ -41,6 +43,7 @@ export function Equipament({ index, handleDevice }) {
           onChange={(e) => setUserEquipamentDescription(e.target.value)}
           required
         >
+          {/* pela responsividade no computador parece que as opcoes estao com overflow (passando a tela), porem no celular esta tudo ok */}
           <option disabled selected>
             Selecione o estado do equipamento:
           </option>

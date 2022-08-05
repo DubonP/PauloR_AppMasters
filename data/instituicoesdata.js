@@ -1,4 +1,5 @@
 export const instituicoesData = [
+  /* Data para renderizar as instituicoes */
   {
     id: "1",
     nome: "Hospital do Amor",

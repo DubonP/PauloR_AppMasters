@@ -27,7 +27,9 @@ export default function Home({ status }) {
     newDevices[index] = device;
     setDevices(newDevices);
   }
-
+  /* Verificacao do cep, so busca CEP com 8 digitos, caso o cep seja valido, preenche os campos de 
+  endereço com os dados do cep retornado pelo webservice do ViaCEP (https://viacep.com.br/). 
+  Caso contrario, exibe um alerta. */
   const checkCEP = (e) => {
     const cep = e.target.value.replace(/[^0-9]/g, "");
     if (cep.length === 8) {
@@ -47,7 +49,9 @@ export default function Home({ status }) {
             setUserCity(data.localidade);
             setUserState(data.uf);
             setUserAddress(data.logradouro);
-            setUserNeighborhood(data.bairro);
+            setUserNeighborhood(
+              data.bairro
+            ); /*https://stackoverflow.com/questions/28889826/how-to-set-focus-on-an-input-field-after-rendering*/
             document.getElementById("number").focus();
             setLoading(false);
           }
@@ -62,7 +66,8 @@ export default function Home({ status }) {
       });
     }
   };
-
+  /* Post com os dados do usuario e os equipamentos, usei algumas mensagens para erros especificos pois 
+eles retornavam em ingles, visto que o site era para brasileiros, usei essas mensagens criadas pelo Front */
   function postDonation(e) {
     e.preventDefault();
     api
@@ -149,11 +154,13 @@ export default function Home({ status }) {
 
   return (
     <div>
+      {/* Titulo na aba do navegador */}
       <Head>
         <title>Doação de computadores</title>
       </Head>
       <Header />
       <main className={styles.main}>
+        {/* Loading no centro da tela quando o cep é buscado */}
         <div>{loading == true && <Loading />}</div>
         <form
           onSubmit={(e) => postDonation(e)}
@@ -201,7 +208,7 @@ export default function Home({ status }) {
             </div>
           </div>
           <div className={styles.donation_title_position}>
-            <h1 className={styles.donation_title}>Endereco</h1>
+            <h1 className={styles.donation_title}>Endereço</h1>
           </div>
           <div className={styles.donation_inputs}>
             <div className="">
@@ -310,6 +317,8 @@ export default function Home({ status }) {
             </div>
           </div>
           <div id="new_equipaments">
+            {/* Qaundo o userEquipament for maior que 0, o sistema ira mostrar os equipamentos que o usuario 
+            deseja doar, fazendo um map com o numero de vezes escolhidas e renderizando o Equipament importado */}
             {userEquipament > 0 &&
               [...Array(Number(userEquipament))].map((_, index) => (
                 <Equipament

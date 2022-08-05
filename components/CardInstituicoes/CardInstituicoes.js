@@ -4,6 +4,8 @@ import styles from "../../styles/CardInstituicoes.module.css";
 import Image from "next/image";
 import { BsInstagram, BsFacebook, BsWhatsapp } from "react-icons/bs";
 
+/* criacao dos cards para instituicoes com os end points da instituicoesdata e usando react-icons para os icones dos links  */
+
 export function CardInstituicoes(props) {
   return (
     <div className={styles.CardInstituicoes_all}>
