@@ -8,16 +8,16 @@ import { Loading } from "../components/Loading";
 import { Header } from "../components/Header";
 
 export default function Home({ status }) {
-  const [userEmail, setUserEmail] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userPhone, setUserPhone] = useState("");
-  const [userAddress, setUserAddress] = useState("");
-  const [userCity, setUserCity] = useState("");
-  const [userState, setUserState] = useState("");
-  const [userZipCode, setUserZipCode] = useState("");
-  const [userHouseNumber, setUserHouseNumber] = useState("");
-  const [userComplement, setUserComplement] = useState("");
-  const [userNeighborhood, setUserNeighborhood] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [userNumber, setUserNumber] = useState("");
+  const [complement, setComplement] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
   const [userEquipament, setUserEquipament] = useState(0);
   const [devices, setDevices] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -46,10 +46,10 @@ export default function Home({ status }) {
             });
             setLoading(false);
           } else {
-            setUserCity(data.localidade);
-            setUserState(data.uf);
-            setUserAddress(data.logradouro);
-            setUserNeighborhood(
+            setCity(data.localidade);
+            setState(data.uf);
+            setStreetAddress(data.logradouro);
+            setNeighborhood(
               data.bairro
             ); /*https://stackoverflow.com/questions/28889826/how-to-set-focus-on-an-input-field-after-rendering*/
             document.getElementById("number").focus();
@@ -72,16 +72,16 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
     e.preventDefault();
     api
       .post("/donation", {
-        name: userName,
-        email: userEmail,
-        phone: userPhone,
-        zip: userZipCode,
-        city: userCity,
-        state: userState,
-        streetAddress: userAddress,
-        number: userHouseNumber,
-        complement: userComplement,
-        neighborhood: userNeighborhood,
+        name,
+        email,
+        phone,
+        zip,
+        city,
+        state,
+        streetAddress,
+        number: userNumber,
+        complement,
+        neighborhood,
         deviceCount: Number(userEquipament),
         devices,
       })
@@ -94,28 +94,120 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
           timer: 3000,
         });
         {
-          setUserName(""),
-            setUserEmail(""),
-            setUserPhone(""),
-            setUserZipCode(""),
-            setUserCity(""),
-            setUserState(""),
-            setUserAddress(""),
-            setUserHouseNumber(""),
-            setUserComplement(""),
-            setUserNeighborhood("");
+          setName(""),
+            setEmail(""),
+            setPhone(""),
+            setZip(""),
+            setCity(""),
+            setState(""),
+            setStreetAddress(""),
+            setUserNumber(""),
+            setComplement(""),
+            setNeighborhood("");
         }
       })
       .catch(function (error) {
         if (error.response.status == 400) {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: `Erro: ${error.response.status} - ${error.response.data.errorMessage}`,
-            text: "Preencha corretamente o campo para continuar",
-            showConfirmButton: true,
-          });
-          console.log(error.response.data.errorMessage);
+          let obj = error.response.data.requiredFields.find(
+            (element) => element == "name"
+          );
+          if (obj) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Preencha o campo nome",
+              showConfirmButton: true,
+            });
+          }
+          obj = error.response.data.requiredFields.find(
+            (element) => element == "phone"
+          );
+          if (obj) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Preencha o campo telefone",
+              showConfirmButton: true,
+            });
+          }
+          obj = error.response.data.requiredFields.find(
+            (element) => element == "zip"
+          );
+          if (obj) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Preencha o campo CEP",
+              showConfirmButton: true,
+            });
+          }
+          obj = error.response.data.requiredFields.find(
+            (element) => element == "city"
+          );
+          if (obj) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Preencha o campo cidade",
+              showConfirmButton: true,
+            });
+          }
+          obj = error.response.data.requiredFields.find(
+            (element) => element == "state"
+          );
+          if (obj) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Preencha o campo estado",
+              showConfirmButton: true,
+            });
+          }
+          obj = error.response.data.requiredFields.find(
+            (element) => element == "streetAddress"
+          );
+          if (obj) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Preencha o campo endereço",
+              showConfirmButton: true,
+            });
+          }
+          obj = error.response.data.requiredFields.find(
+            (element) => element == "number"
+          );
+          if (obj) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Preencha o campo número",
+              showConfirmButton: true,
+            });
+          }
+          obj = error.response.data.requiredFields.find(
+            (element) => element == "neighborhood"
+          );
+          if (obj) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Preencha o campo bairro",
+              showConfirmButton: true,
+            });
+          }
+          obj = error.response.data.requiredFields.find(
+            (element) => element == "deviceCount"
+          );
+          if (obj) {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Preencha o campo quantidade de equipamentos",
+              showConfirmButton: true,
+            });
+          }
+          console.log(error.response.data.requiredFields);
         } else if (error.response.status == 500) {
           Swal.fire({
             position: "center",
@@ -176,21 +268,20 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 name="name"
                 type="text"
                 placeholder="Nome"
-                value={userName}
-                required
+                value={name}
                 className={styles.donation_input}
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
             <div className="">
               <input
                 type="email"
                 id="email"
-                value={userEmail}
+                value={email}
                 name="email"
                 placeholder="Email"
                 className={styles.donation_input}
-                onChange={(e) => setUserEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>
             <div className="">
@@ -199,11 +290,10 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 name="phone"
                 type="text"
                 className={styles.donation_input}
-                required
-                value={userPhone}
+                value={phone}
                 placeholder="Celular"
                 pattern="[0-9]{11}"
-                onChange={(e) => setUserPhone(e.target.value)}
+                onChange={(e) => setPhone(e.target.value)}
               ></input>
             </div>
           </div>
@@ -216,48 +306,44 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 id="textCEP"
                 name="cep"
                 type="text"
-                value={userZipCode}
+                value={zip}
                 placeholder="CEP"
-                required
                 className={styles.donation_input}
                 onBlur={checkCEP}
-                onChange={(e) => setUserZipCode(e.target.value)}
+                onChange={(e) => setZip(e.target.value)}
               ></input>
             </div>
             <div className="">
               <input
                 id="city"
-                value={userCity}
+                value={city}
                 name="city"
                 type="text"
                 placeholder="Cidade"
-                required
                 className={styles.donation_input}
-                onChange={(e) => setUserCity(e.target.value)}
+                onChange={(e) => setCity(e.target.value)}
               ></input>
             </div>
             <div className="">
               <input
                 id="state"
-                value={userState}
+                value={state}
                 name="state"
                 type="text"
                 placeholder="Estado"
-                required
                 className={styles.donation_input}
-                onChange={(e) => setUserState(e.target.value)}
+                onChange={(e) => setState(e.target.value)}
               ></input>
             </div>
             <div className="">
               <input
                 id="streetAddress"
-                value={userAddress}
+                value={streetAddress}
                 name="streetAddress"
                 type="text"
                 placeholder="Logradouro (Rua, avenida, etc)"
-                required
                 className={styles.donation_input}
-                onChange={(e) => setUserAddress(e.target.value)}
+                onChange={(e) => setStreetAddress(e.target.value)}
               ></input>
             </div>
             <div className="">
@@ -266,10 +352,9 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 name="number"
                 type="number"
                 placeholder="Numero"
-                value={userHouseNumber}
-                required
+                value={userNumber}
                 pattern="[0-9]{11}"
-                onChange={(e) => setUserHouseNumber(e.target.value)}
+                onChange={(e) => setUserNumber(e.target.value)}
                 className={styles.donation_input}
               ></input>
             </div>
@@ -277,10 +362,10 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
               <input
                 id="complement"
                 name="complement"
-                value={userComplement}
+                value={complement}
                 type="text"
                 placeholder="Complemento"
-                onChange={(e) => setUserComplement(e.target.value)}
+                onChange={(e) => setComplement(e.target.value)}
                 className={styles.donation_input}
               ></input>
             </div>
@@ -288,11 +373,10 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
               <input
                 id="neighborhood"
                 name="neighborhood"
-                value={userNeighborhood}
+                value={neighborhood}
                 type="text"
                 placeholder="Bairro"
-                required
-                onChange={(e) => setUserNeighborhood(e.target.value)}
+                onChange={(e) => setNeighborhood(e.target.value)}
                 className={styles.donation_input}
               ></input>
             </div>
@@ -310,7 +394,6 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 name="eqNumber"
                 type="number"
                 placeholder="1 - 1000"
-                required
                 className={styles.donation_input}
                 onChange={(e) => setUserEquipament(e.target.value)}
               ></input>
