@@ -208,30 +208,6 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
             });
           }
           console.log(error.response.data.requiredFields);
-        } else if (error.response.status == 500) {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: `Erro: ${error.response.status} - ${error.response.data.errorMessage}`,
-            text: "Erro no servidor, tente novamente mais tarde",
-            showConfirmButton: true,
-          });
-        } else if (error.response.status == 501) {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: `Erro: ${error.response.status} - ${error.response.data.errorMessage}`,
-            text: "O metodo usado para fazer a requisicao nao funcionou ou nao encontrou o server. Por favor tente novamente mais tarde",
-            showConfirmButton: true,
-          });
-        } else if (error.response.status == 503) {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: `Erro: ${error.response.status} - ${error.response.data.errorMessage}`,
-            text: "Servidor indisponivel, tente novamente mais tarde",
-            showConfirmButton: true,
-          });
         } else {
           Swal.fire({
             position: "center",
