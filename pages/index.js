@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { api } from "./api/API";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Equipament } from "../components/Equipament";
 import { Loading } from "../components/Loading";
 import { Header } from "../components/Header";
@@ -21,6 +21,15 @@ export default function Home({ status }) {
   const [userEquipament, setUserEquipament] = useState(0);
   const [devices, setDevices] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [erroFocus, setErroFocus] = useState(false);
+  const [erroName, setErroName] = useState([]);
+
+  const numberInput = useRef(null);
+
+  // funcao para pegar os erros, e atualizar ele sempre que muda
+  function addErro(erro) {
+    setErroName(() => [...erro]);
+  }
 
   function handleDevice(device, index) {
     const newDevices = [...devices];
@@ -49,10 +58,8 @@ export default function Home({ status }) {
             setCity(data.localidade);
             setState(data.uf);
             setStreetAddress(data.logradouro);
-            setNeighborhood(
-              data.bairro
-            ); /*https://stackoverflow.com/questions/28889826/how-to-set-focus-on-an-input-field-after-rendering*/
-            document.getElementById("number").focus();
+            setNeighborhood(data.bairro);
+            numberInput.current.focus();
             setLoading(false);
           }
         });
@@ -108,106 +115,18 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
       })
       .catch(function (error) {
         if (error.response.status == 400) {
-          let obj = error.response.data.requiredFields.find(
-            (element) => element == "name"
-          );
-          if (obj) {
+          if (error.response.data.requiredFields) {
+            addErro(error.response.data.requiredFields);
+            setErroFocus(true);
+          } else {
             Swal.fire({
               position: "center",
               icon: "error",
-              title: "Preencha o campo nome",
+              title: "Selecione o equipamento e sua condicao",
+              text: "Preencha todos os campos",
               showConfirmButton: true,
             });
           }
-          obj = error.response.data.requiredFields.find(
-            (element) => element == "phone"
-          );
-          if (obj) {
-            Swal.fire({
-              position: "center",
-              icon: "error",
-              title: "Preencha o campo telefone",
-              showConfirmButton: true,
-            });
-          }
-          obj = error.response.data.requiredFields.find(
-            (element) => element == "zip"
-          );
-          if (obj) {
-            Swal.fire({
-              position: "center",
-              icon: "error",
-              title: "Preencha o campo CEP",
-              showConfirmButton: true,
-            });
-          }
-          obj = error.response.data.requiredFields.find(
-            (element) => element == "city"
-          );
-          if (obj) {
-            Swal.fire({
-              position: "center",
-              icon: "error",
-              title: "Preencha o campo cidade",
-              showConfirmButton: true,
-            });
-          }
-          obj = error.response.data.requiredFields.find(
-            (element) => element == "state"
-          );
-          if (obj) {
-            Swal.fire({
-              position: "center",
-              icon: "error",
-              title: "Preencha o campo estado",
-              showConfirmButton: true,
-            });
-          }
-          obj = error.response.data.requiredFields.find(
-            (element) => element == "streetAddress"
-          );
-          if (obj) {
-            Swal.fire({
-              position: "center",
-              icon: "error",
-              title: "Preencha o campo endereço",
-              showConfirmButton: true,
-            });
-          }
-          obj = error.response.data.requiredFields.find(
-            (element) => element == "number"
-          );
-          if (obj) {
-            Swal.fire({
-              position: "center",
-              icon: "error",
-              title: "Preencha o campo número",
-              showConfirmButton: true,
-            });
-          }
-          obj = error.response.data.requiredFields.find(
-            (element) => element == "neighborhood"
-          );
-          if (obj) {
-            Swal.fire({
-              position: "center",
-              icon: "error",
-              title: "Preencha o campo bairro",
-              showConfirmButton: true,
-            });
-          }
-          obj = error.response.data.requiredFields.find(
-            (element) => element == "deviceCount"
-          );
-          if (obj) {
-            Swal.fire({
-              position: "center",
-              icon: "error",
-              title: "Preencha o campo quantidade de equipamentos",
-              showConfirmButton: true,
-            });
-          }
-          console.log(error.response.data.requiredFields);
         } else {
           Swal.fire({
             position: "center",
@@ -219,7 +138,6 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
         }
       });
   }
-
   return (
     <div>
       {/* Titulo na aba do navegador */}
@@ -243,9 +161,11 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Nome"
+                placeholder="*Nome"
                 value={name}
-                className={styles.donation_input}
+                className={`${styles.donation_input} ${
+                  erroName.includes("name") && styles.inputError
+                }`}
                 onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
@@ -265,13 +185,16 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 id="phone"
                 name="phone"
                 type="text"
-                className={styles.donation_input}
+                className={`${styles.donation_input} ${
+                  erroName.includes("phone") && styles.inputError
+                }`}
                 value={phone}
-                placeholder="Celular"
+                placeholder="*Celular"
                 pattern="[0-9]{11}"
                 onChange={(e) => setPhone(e.target.value)}
               ></input>
             </div>
+            {/*  <div>{erroFocus == true && <ErroFocus />}</div> */}
           </div>
           <div className={styles.donation_title_position}>
             <h1 className={styles.donation_title}>Endereço</h1>
@@ -283,8 +206,10 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 name="cep"
                 type="text"
                 value={zip}
-                placeholder="CEP"
-                className={styles.donation_input}
+                placeholder="*CEP"
+                className={`${styles.donation_input} ${
+                  erroName.includes("zip") && styles.inputError
+                }`}
                 onBlur={checkCEP}
                 onChange={(e) => setZip(e.target.value)}
               ></input>
@@ -295,8 +220,10 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 value={city}
                 name="city"
                 type="text"
-                placeholder="Cidade"
-                className={styles.donation_input}
+                placeholder="*Cidade"
+                className={`${styles.donation_input} ${
+                  erroName.includes("city") && styles.inputError
+                }`}
                 onChange={(e) => setCity(e.target.value)}
               ></input>
             </div>
@@ -306,8 +233,10 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 value={state}
                 name="state"
                 type="text"
-                placeholder="Estado"
-                className={styles.donation_input}
+                placeholder="*Estado"
+                className={`${styles.donation_input} ${
+                  erroName.includes("state") && styles.inputError
+                }`}
                 onChange={(e) => setState(e.target.value)}
               ></input>
             </div>
@@ -317,8 +246,10 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 value={streetAddress}
                 name="streetAddress"
                 type="text"
-                placeholder="Logradouro (Rua, avenida, etc)"
-                className={styles.donation_input}
+                placeholder="*Logradouro (Rua, avenida, etc)"
+                className={`${styles.donation_input} ${
+                  erroName.includes("streetAddress") && styles.inputError
+                }`}
                 onChange={(e) => setStreetAddress(e.target.value)}
               ></input>
             </div>
@@ -327,11 +258,14 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 id="number"
                 name="number"
                 type="number"
-                placeholder="Numero"
+                placeholder="*Numero"
                 value={userNumber}
+                ref={numberInput}
                 pattern="[0-9]{11}"
                 onChange={(e) => setUserNumber(e.target.value)}
-                className={styles.donation_input}
+                className={`${styles.donation_input} ${
+                  erroName.includes("number") && styles.inputError
+                }`}
               ></input>
             </div>
             <div className="">
@@ -351,9 +285,11 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 name="neighborhood"
                 value={neighborhood}
                 type="text"
-                placeholder="Bairro"
+                placeholder="*Bairro"
                 onChange={(e) => setNeighborhood(e.target.value)}
-                className={styles.donation_input}
+                className={`${styles.donation_input} ${
+                  erroName.includes("neighborhood") && styles.inputError
+                }`}
               ></input>
             </div>
           </div>
@@ -362,7 +298,7 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
           </div>
           <div className={styles.donation_inputs}>
             <label className="" id="eqNumber_label">
-              Numero de equipamentos:
+              *Numero de equipamentos:
             </label>
             <div className={styles.donation_eq_number}>
               <input
@@ -370,7 +306,9 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 name="eqNumber"
                 type="number"
                 placeholder="1 - 1000"
-                className={styles.donation_input}
+                className={`${styles.donation_input} ${
+                  erroName.includes("deviceCount") && styles.inputError
+                }`}
                 onChange={(e) => setUserEquipament(e.target.value)}
               ></input>
             </div>

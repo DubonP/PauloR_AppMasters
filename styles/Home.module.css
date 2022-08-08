@@ -45,6 +45,11 @@
   border-bottom: 1px solid rgb(9, 145, 204);
 }
 
+.inputError {
+  border-bottom: 2px solid rgb(255, 0, 0);
+  outline: 2px solid rgba(255, 0, 0, 0.2);
+}
+
 .donation_eq_number {
   display: flex;
   flex-direction: row;
