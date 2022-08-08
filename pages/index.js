@@ -258,7 +258,7 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
                 id="number"
                 name="number"
                 type="number"
-                placeholder="*Numero"
+                placeholder="*Número"
                 value={userNumber}
                 ref={numberInput}
                 pattern="[0-9]{11}"
@@ -298,7 +298,7 @@ eles retornavam em ingles, visto que o site era para brasileiros, usei essas men
           </div>
           <div className={styles.donation_inputs}>
             <label className="" id="eqNumber_label">
-              *Numero de equipamentos:
+              *Número de equipamentos:
             </label>
             <div className={styles.donation_eq_number}>
               <input
